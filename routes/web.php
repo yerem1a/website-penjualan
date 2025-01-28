@@ -30,17 +30,17 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('dashboard');
 
-    // Product management routes using AdminController
-    Route::get('products', [AdminController::class, 'index'])->name('products.index');
-    Route::get('products/create', [AdminController::class, 'create'])->name('products.create');
-    Route::post('products', [AdminController::class, 'store'])->name('products.store');
-    Route::get('products/{product}/edit', [AdminController::class, 'edit'])->name('products.edit');
-    Route::put('products/{product}', [AdminController::class, 'update'])->name('products.update');
-    Route::delete('products/{product}', [AdminController::class, 'destroy'])->name('products.destroy');
+    // Product management routes using ProductController
+    Route::get('products', [ProductController::class, 'index'])->name('products.index');
+    Route::get('products/create', [ProductController::class, 'create'])->name('products.create');
+    Route::post('products', [ProductController::class, 'store'])->name('products.store');
+    Route::get('products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+    Route::put('products/{product}', [ProductController::class, 'update'])->name('products.update');
+    Route::delete('products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
 
     // Category management routes using CategoryController
     Route::resource('categories', CategoryController::class);
 
-    // Order management routes (optional, remove if not needed)
+    // Order management routes
     Route::resource('orders', OrderController::class)->except(['create', 'store']);
 });
